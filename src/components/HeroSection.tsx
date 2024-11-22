@@ -4,14 +4,14 @@ import { Users, Clock, Star, Coffee } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <section id="home" className="relative h-[85vh] w-screen flex items-center justify-center">
+   <section id="home" className="relative h-[85vh] w-screen flex items-center justify-center">
   {/* Hero Background Image */}
   <div className="absolute inset-0 z-0">
     <img 
       src="https://creatorspace.imgix.net/users/cm36fnldg0bvzqq01ucd25h3d/ss7vzE6uBy0sHxb9-bg.png?w=750&h=750" 
       alt="Background" 
-          className="w-full h-full object-cover"
-     />
+      className="w-full h-full object-cover"  // This ensures the image covers the entire div
+    />
     <div className="absolute inset-0 bg-black/30"></div>
   </div>
 
