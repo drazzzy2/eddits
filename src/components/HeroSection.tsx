@@ -10,8 +10,8 @@ export default function HeroSection() {
         <img 
           src="https://lh3.google.com/u/1/d/1KvD0fRa6_PRXzS-wVY1k71b-t11y_Klx=w1912-h954-iv1" 
           alt="Background" 
-          className="w-full h-full object-contain md:object-cover bg-black"
-        />
+          className="w-full h-full object-cover"
+         />
         <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
