@@ -28,24 +28,12 @@ const processes = [
 export default function ProcessSection() {
   return (
     <section id="process" className="py-24 relative overflow-hidden">
-      {/* Spline 3D Element */}
-      <div className="absolute top-0 left-0 lg:-left-24 w-[600px] h-[600px] pointer-events-none z-10">
-        <iframe 
-          src="https://prod.spline.design/9741da69f4391a6477366391b603d40e/scene.splinecode" 
-          frameBorder="0" 
-          width="100%" 
-          height="100%"
-          title="3D Animation"
-          className="opacity-60 mix-blend-screen"
-        />
-      </div>
-
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 relative z-20">
+      <div className="max-w-6xl mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
             <h2 className="section-title">How We Work</h2>
@@ -62,7 +50,7 @@ export default function ProcessSection() {
               type="fade-up"
               delay={index * 200}
             >
-              <div className="process-card group h-full backdrop-blur-sm">
+              <div className="process-card group h-full">
                 <div className="relative z-10 flex flex-col h-full">
                   <div className="mb-4 text-cyan-400 group-hover:text-violet-400 transition-colors duration-300">
                     {process.icon}
