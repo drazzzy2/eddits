@@ -1,17 +1,81 @@
-import React from 'react';
-import { Mail, Github, Linkedin, Instagram, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Instagram, Linkedin, PenTool, ArrowRight, Loader2 } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import emailjs from '@emailjs/browser';
+import toast, { Toaster } from 'react-hot-toast';
 
 const socialLinks = [
-  { icon: <Github className="w-5 h-5" />, label: 'Github', href: '#' },
-  { icon: <Linkedin className="w-5 h-5" />, label: 'LinkedIn', href: '#' },
-  { icon: <Instagram className="w-5 h-5" />, label: 'Instagram', href: '#' },
-  { icon: <Mail className="w-5 h-5" />, label: 'Email', href: 'mailto:contact@example.com' }
+  { icon: <Instagram className="w-5 h-5" />, label: 'Instagram', href: 'https://www.instagram.com/drazzzy__/' },
+  { icon: <PenTool className="w-5 h-5" />, label: 'Behance', href: 'https://www.behance.net/mostafadrazy' },
+  { icon: <Linkedin className="w-5 h-5" />, label: 'LinkedIn', href: 'https://www.linkedin.com/in/eddarrazy/' },
+  { icon: <Mail className="w-5 h-5" />, label: 'Email', href: 'mailto:mostafadrazy@gmail.com' }
 ];
 
+interface FormData {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+const initialFormData: FormData = {
+  name: '',
+  email: '',
+  subject: '',
+  message: ''
+};
+
 export default function ContactSection() {
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error('Please fill in all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await emailjs.send(
+        'service_ydcpnc9',
+        'template_51ppdda',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_email: 'mostafadrazy@gmail.com'
+        },
+        'ZRYlOF3dpkaEiHGbm'
+      );
+
+      if (result.status === 200) {
+        toast.success('Message sent successfully!');
+        setFormData(initialFormData);
+      }
+    } catch (error) {
+      toast.error('Failed to send message. Please try again.');
+      console.error('Email error:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
+      <Toaster position="top-right" />
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl"></div>
@@ -42,6 +106,8 @@ export default function ContactSection() {
                     <ScrollReveal key={index} type="fade-up" delay={index * 100}>
                       <a
                         href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="contact-social-link group"
                       >
                         <div className="flex items-center gap-3">
@@ -72,31 +138,39 @@ export default function ContactSection() {
           <ScrollReveal type="slide-left">
             <div className="relative">
               <div className="bg-white/5 rounded-2xl p-8 border border-white/10 backdrop-blur-sm">
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <ScrollReveal type="fade-up" delay={100}>
                       <div className="space-y-2">
                         <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-                          Name
+                          Name <span className="text-cyan-500">*</span>
                         </label>
                         <input
                           type="text"
                           id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           className="contact-input"
                           placeholder="John Doe"
+                          required
                         />
                       </div>
                     </ScrollReveal>
                     <ScrollReveal type="fade-up" delay={200}>
                       <div className="space-y-2">
                         <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                          Email
+                          Email <span className="text-cyan-500">*</span>
                         </label>
                         <input
                           type="email"
                           id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
                           className="contact-input"
                           placeholder="john@example.com"
+                          required
                         />
                       </div>
                     </ScrollReveal>
@@ -110,6 +184,9 @@ export default function ContactSection() {
                       <input
                         type="text"
                         id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
                         className="contact-input"
                         placeholder="Project Inquiry"
                       />
@@ -119,22 +196,39 @@ export default function ContactSection() {
                   <ScrollReveal type="fade-up" delay={400}>
                     <div className="space-y-2">
                       <label htmlFor="message" className="block text-sm font-medium text-gray-300">
-                        Message
+                        Message <span className="text-cyan-500">*</span>
                       </label>
                       <textarea
                         id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
                         rows={6}
                         className="contact-input resize-none"
                         placeholder="Tell me about your project..."
+                        required
                       ></textarea>
                     </div>
                   </ScrollReveal>
 
                   <ScrollReveal type="fade-up" delay={500}>
-                    <button type="submit" className="contact-submit-btn group">
+                    <button 
+                      type="submit" 
+                      className="contact-submit-btn group"
+                      disabled={isSubmitting}
+                    >
                       <span className="relative z-10 flex items-center justify-center gap-2">
-                        Send Message
-                        <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" />
+                          </>
+                        )}
                       </span>
                     </button>
                   </ScrollReveal>

@@ -28,12 +28,12 @@ export default function StatCard({
     <ScrollReveal type="fade-up" delay={delay}>
       <div className="text-center transform hover:scale-105 transition-transform duration-300">
         <div className="flex items-center justify-center mb-2">
-          <Icon className={`w-6 h-6 ${iconColor} animate-bounce`} style={{ animationDelay: `${delay}ms` }} />
+          <Icon className={`w-5 h-5 sm:w-6 sm:h-6 ${iconColor} animate-bounce`} style={{ animationDelay: `${delay}ms` }} />
         </div>
-        <div className="text-2xl font-bold text-white mb-1">
+        <div className="text-xl sm:text-2xl font-bold text-white mb-1">
           {count}+
         </div>
-        <div className="text-sm text-gray-400">{label}</div>
+        <div className="text-xs sm:text-sm text-gray-400">{label}</div>
       </div>
     </ScrollReveal>
   );

@@ -1,9 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import PageTransition from '../components/PageTransition';
-import { Building2, Video, Database, Laptop, GraduationCap, Languages, Book, Globe } from 'lucide-react';
+import ContactModal from '../components/ContactModal';
+import { Building2, Video, Database, Laptop, GraduationCap, Languages, Book, Globe, Mail, Instagram, Linkedin, PenTool } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Toaster } from 'react-hot-toast';
+
+const progressVariants = {
+  hidden: { width: 0 },
+  visible: (progress: number) => ({
+    width: `${progress}%`,
+    transition: {
+      duration: 1.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  })
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    scale: 0.95
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
 
 export default function Story() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const experiences = [
     {
       role: "Video Editor | Graphic Designer",
@@ -55,6 +88,8 @@ export default function Story() {
 
   return (
     <PageTransition>
+      <Toaster position="top-right" />
+      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <div className="relative">
         {/* Hero Section with Parallax Effect */}
         <div className="h-[70vh] relative overflow-hidden">
@@ -128,54 +163,82 @@ export default function Story() {
                 <h2 className="text-3xl font-bold gradient-text mb-8">Education</h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                   {/* Degree Information */}
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-500 p-[2px]">
+                  <motion.div 
+                    className="space-y-6"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={cardVariants}
+                  >
+                    <div className="flex items-start gap-4 group">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-500 p-[2px] transform group-hover:scale-110 transition-all duration-300">
                         <div className="w-full h-full rounded-xl bg-[#12141C] flex items-center justify-center">
-                          <Book className="w-6 h-6 text-cyan-400" />
+                          <Book className="w-6 h-6 text-cyan-400 group-hover:text-violet-400 transition-colors duration-300" />
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-2">Bachelor's Degree in English Studies</h3>
+                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-violet-400 transition-all duration-300">
+                          Bachelor's Degree in English Studies
+                        </h3>
                         <p className="text-cyan-400 font-medium mb-1">Mohammed V University, Rabat</p>
                         <p className="text-gray-400">2021 - 2024</p>
-                        <p className="text-gray-300 mt-4">
+                        <p className="text-gray-300 mt-4 group-hover:text-gray-200 transition-colors duration-300">
                           Specialized in Linguistics, with coursework in Media Studies and Communications, building strong
                           analytical and critical thinking skills.
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Languages */}
-                  <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-500 p-[2px]">
+                  <motion.div 
+                    className="space-y-6"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={cardVariants}
+                  >
+                    <div className="flex items-start gap-4 group">
+                      <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-violet-500 p-[2px] transform group-hover:scale-110 transition-all duration-300">
                         <div className="w-full h-full rounded-xl bg-[#12141C] flex items-center justify-center">
-                          <Globe className="w-6 h-6 text-cyan-400" />
+                          <Globe className="w-6 h-6 text-cyan-400 group-hover:text-violet-400 transition-colors duration-300" />
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-xl font-bold text-white mb-4">Languages</h3>
+                        <h3 className="text-xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-violet-400 transition-all duration-300">
+                          Languages
+                        </h3>
                         <div className="space-y-4">
                           {languages.map((language, index) => (
-                            <div key={index} className="space-y-2">
+                            <motion.div 
+                              key={index} 
+                              className="space-y-2"
+                              initial="hidden"
+                              whileInView="visible"
+                              viewport={{ once: true }}
+                              custom={language.progress}
+                            >
                               <div className="flex justify-between mb-1">
-                                <span className="text-gray-300">{language.name}</span>
-                                <span className="text-cyan-400">{language.level}</span>
+                                <span className="text-gray-300 group-hover:text-white transition-colors duration-300">
+                                  {language.name}
+                                </span>
+                                <span className="text-cyan-400 group-hover:text-violet-400 transition-colors duration-300">
+                                  {language.level}
+                                </span>
                               </div>
                               <div className="h-2 bg-gray-700 rounded-full overflow-hidden">
-                                <div 
-                                  className="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full transition-all duration-1000"
-                                  style={{ width: `${language.progress}%` }}
-                                ></div>
+                                <motion.div 
+                                  className="h-full bg-gradient-to-r from-cyan-500 to-violet-500 rounded-full"
+                                  variants={progressVariants}
+                                  custom={language.progress}
+                                ></motion.div>
                               </div>
-                            </div>
+                            </motion.div>
                           ))}
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
             </ScrollReveal>
@@ -217,6 +280,85 @@ export default function Story() {
             </div>
           </div>
         </div>
+
+        {/* Call to Action Section */}
+        <ScrollReveal>
+          <div className="relative py-24 overflow-hidden">
+            <div className="absolute inset-0">
+              <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="bg-white/5 backdrop-blur-lg rounded-3xl border border-white/10 p-8 md:p-12 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold gradient-text mb-6">
+                  Ready to Start Your Project?
+                </h2>
+                <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                  Let's create something extraordinary together. Get in touch and let's discuss your ideas.
+                </p>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-violet-500 
+                           rounded-xl text-white font-medium transition-all duration-300 
+                           hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02]
+                           relative overflow-hidden group"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Let's Talk
+                    <Mail className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" />
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Footer */}
+        <footer className="relative py-8 border-t border-gray-800/50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+              <p className="text-gray-400 text-sm">
+                © {new Date().getFullYear()} Eddits. All rights reserved.
+              </p>
+              <div className="flex items-center gap-4">
+                <a
+                  href="https://www.instagram.com/drazzzy__/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
+                           flex items-center justify-center transition-all duration-300
+                           hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
+                           hover:border-cyan-500/30 hover:scale-110"
+                >
+                  <Instagram className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
+                </a>
+                <a
+                  href="https://www.behance.net/mostafadrazy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
+                           flex items-center justify-center transition-all duration-300
+                           hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
+                           hover:border-cyan-500/30 hover:scale-110"
+                >
+                  <PenTool className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/eddarrazy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
+                           flex items-center justify-center transition-all duration-300
+                           hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
+                           hover:border-cyan-500/30 hover:scale-110"
+                >
+                  <Linkedin className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </PageTransition>
   );

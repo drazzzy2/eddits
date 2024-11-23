@@ -19,25 +19,25 @@ export default function ProjectCard({
   mediaUrl, 
   isVideo = false, 
   videoUrl,
-  aspectRatio = '9/16',
+  aspectRatio = '16/9',
   size = 'sm',
   delay = 0
 }: ProjectCardProps) {
-  const sizeClasses = {
-    sm: 'col-span-1',
-    md: 'col-span-2',
-    lg: 'col-span-2 md:col-span-4'
+  const aspectClasses = {
+    '16/9': 'aspect-video',
+    '9/16': 'aspect-[9/16]',
+    'square': 'aspect-square'
   };
 
-  const aspectClasses = {
-    '16/9': 'w-[380px] h-[213.75px]',
-    '9/16': 'w-[213.75px] h-[380px]',
-    'square': 'aspect-square'
+  const sizeClasses = {
+    sm: '',
+    md: 'md:col-span-2',
+    lg: 'md:col-span-1'
   };
 
   return (
     <ScrollReveal delay={delay} type="fade-up">
-      <div className={`${sizeClasses[size]} flex justify-center group`}>
+      <div className={`${sizeClasses[size]} group`}>
         <div className="relative overflow-hidden rounded-2xl bg-[#12141C]/40 backdrop-blur-sm 
                       transition-all duration-500 hover:scale-[1.02]
                       border border-[#2A2D3A]/50 hover:border-cyan-500/30

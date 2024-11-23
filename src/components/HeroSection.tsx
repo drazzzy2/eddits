@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import Testimonial from './Testimonial';
 import StatCard from './StatCard';
-import { Users, Clock, Star, Coffee } from 'lucide-react';
+import { Users, Clock, Star, Coffee, Instagram, Linkedin, PenTool } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const stats = [
@@ -9,6 +9,12 @@ const stats = [
   { icon: Clock, value: 7, label: "Years Experience", color: "text-violet-400" },
   { icon: Star, value: 200, label: "Projects Done", color: "text-yellow-400" },
   { icon: Coffee, value: 1000, label: "Coffee Cups", color: "text-orange-400" }
+];
+
+const socialLinks = [
+  { icon: Instagram, href: 'https://www.instagram.com/drazzzy__/' },
+  { icon: PenTool, href: 'https://www.behance.net/mostafadrazy' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/eddarrazy/' }
 ];
 
 const testimonials = [
@@ -36,6 +42,17 @@ const testimonials = [
 ];
 
 export default function HeroSection() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const handleSmoothScroll = useCallback((e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id.replace('#', ''));
@@ -55,29 +72,32 @@ export default function HeroSection() {
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-[#0A0B0F]"></div>
-          {/* Additional decorative layers */}
           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[#0A0B0F] opacity-80"></div>
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0B0F] to-transparent"></div>
-          {/* Animated grain overlay */}
           <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')]"></div>
         </div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="absolute -bottom-24 w-full px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <StatCard
+      {/* Social Links */}
+      <div className="fixed bottom-8 right-8 z-30">
+        <div className="flex gap-4">
+          {socialLinks.map((social, index) => {
+            const Icon = social.icon;
+            return (
+              <a
                 key={index}
-                icon={stat.icon}
-                endValue={stat.value}
-                label={stat.label}
-                delay={index * 200}
-                iconColor={stat.color}
-              />
-            ))}
-          </div>
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
+                         flex items-center justify-center transition-all duration-300
+                         hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
+                         hover:border-cyan-500/30 hover:scale-110"
+              >
+                <Icon className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
+              </a>
+            );
+          })}
         </div>
       </div>
 
@@ -101,14 +121,14 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="w-full px-4 sm:px-6 lg:px-8 mt-32 sm:mt-40">
+      <div className="w-full px-4 sm:px-6 lg:px-8 mt-32 sm:mt-40 md:mt-48">
         <ScrollReveal>
           <div className="text-center relative z-30 max-w-3xl mx-auto">
-            <div className="space-y-6">
+            <div className="space-y-8">
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold gradient-text">
                 Hi, I'm Eddarrazy
               </h1>
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <h2 className="text-xl sm:text-2xl md:text-3xl text-white font-medium">
                   Video Editor & Motion Designer
                 </h2>
@@ -174,6 +194,26 @@ export default function HeroSection() {
             </div>
           </div>
         </ScrollReveal>
+
+        {/* Stats Bar */}
+        <div className="mt-32 sm:mt-40 mb-16">
+          <div className="max-w-4xl mx-auto bg-white/[0.02] backdrop-blur-sm rounded-2xl 
+                         p-4 sm:p-6 border border-white/5 hover:bg-white/[0.03] 
+                         transition-all duration-500">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+              {stats.map((stat, index) => (
+                <StatCard
+                  key={index}
+                  icon={stat.icon}
+                  endValue={stat.value}
+                  label={stat.label}
+                  delay={index * 200}
+                  iconColor={stat.color}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

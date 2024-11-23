@@ -15,6 +15,11 @@
   input:focus, textarea:focus {
     @apply outline-none ring-2 ring-cyan-500/30 border-cyan-500/30;
   }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer components {

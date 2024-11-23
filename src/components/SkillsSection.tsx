@@ -33,10 +33,10 @@ const skills = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-24">
+    <section id="skills" className="py-16">
       <div className="max-w-6xl mx-auto px-4">
         <ScrollReveal>
-          <h2 className="section-title text-center mb-16">Skills & Expertise</h2>
+          <h2 className="section-title text-center mb-12">Skills & Expertise</h2>
         </ScrollReveal>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
