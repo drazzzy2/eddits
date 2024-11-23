@@ -35,7 +35,6 @@
            border border-[#2A2D3A]/50 hover:border-cyan-500/30 
            transition-all duration-500
            hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]
-           transform hover:-translate-y-1
            relative overflow-hidden;
   }
 
@@ -115,6 +114,32 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
+}
+
+.animate-float-left {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-right {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-sway-left {
+  animation: sway-left 8s ease-in-out infinite;
+}
+
+.animate-sway-right {
+  animation: sway-right 8s ease-in-out infinite;
+}
+
+@keyframes sway-left {
+  0%, 100% { transform: translateX(0) rotate(-1deg); }
+  50% { transform: translateX(-10px) rotate(1deg); }
+}
+
+@keyframes sway-right {
+  0%, 100% { transform: translateX(0) rotate(1deg); }
+  50% { transform: translateX(10px) rotate(-1deg); }
 }
 
 @keyframes gradient {

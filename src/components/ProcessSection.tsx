@@ -50,15 +50,15 @@ export default function ProcessSection() {
               type="fade-up"
               delay={index * 200}
             >
-              <div className="process-card group">
-                <div className="relative z-10">
+              <div className="process-card group h-full">
+                <div className="relative z-10 flex flex-col h-full">
                   <div className="mb-4 text-cyan-400 group-hover:text-violet-400 transition-colors duration-300">
                     {process.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-violet-400 transition-all duration-300">
                     {process.title}
                   </h3>
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors duration-300 flex-grow">
                     {process.description}
                   </p>
                 </div>
