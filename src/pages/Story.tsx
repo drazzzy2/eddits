@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import PageTransition from '../components/PageTransition';
 import ContactModal from '../components/ContactModal';
-import { Building2, Video, Database, Laptop, GraduationCap, Languages, Book, Globe, Mail, Instagram, Linkedin, PenTool } from 'lucide-react';
+import Footer from '../components/Footer';
+import { Building2, Video, Database, Laptop, GraduationCap, Languages, Book, Globe, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 
@@ -34,63 +35,69 @@ const cardVariants = {
   }
 };
 
+const languages = [
+  { name: "Moroccan Arabic", level: "Native", progress: 100 },
+  { name: "Arabic", level: "Professional", progress: 90 },
+  { name: "English", level: "Professional", progress: 90 },
+  { name: "French", level: "Basic", progress: 40 }
+];
+
+const experiences = [
+  {
+    role: "Video Editor | Graphic Designer",
+    company: "Phennx",
+    period: "Jun 2024 - Oct 2024",
+    type: "Part-time, Remote, Australia",
+    description: "Created and edited videos for various social media platforms using Adobe Creative Suite. Designed graphics that supported marketing campaigns, leading to a 20% increase in online visibility over five months.",
+    icon: <Video className="w-6 h-6" />
+  },
+  {
+    role: "Data Scraping Specialist",
+    company: "S2M Distribution",
+    period: "May 2024 - Jul 2024",
+    type: "Part-time, On-site, Morocco",
+    description: "Collected and organized data by scraping information from various online sources to support business decisions and market analysis. Presented findings that improved the company's market strategy.",
+    icon: <Database className="w-6 h-6" />
+  },
+  {
+    role: "Video Editor | Graphic Designer",
+    company: "DigiReach Media",
+    period: "Jan 2022 - Oct 2023",
+    type: "Full-time, Remote, United Kingdom",
+    description: "Produced and edited video content for social media platforms, including video podcasts and promotional content. Designed creative assets that boosted client engagement across multiple platforms.",
+    icon: <Building2 className="w-6 h-6" />
+  },
+  {
+    role: "Video Editor | Graphic Designer",
+    company: "Viral Ideas",
+    period: "Jan 2023 - Apr 2023",
+    type: "Full-time, Remote, United States",
+    description: "Created and edited video content for social media, enhancing brand visibility by designing innovative graphics. Led the creation of campaigns that increased follower count by 15%.",
+    icon: <Laptop className="w-6 h-6" />
+  },
+  {
+    role: "Graphic Design Instructor",
+    company: "Dar Chabab Batana",
+    period: "Jan 2020 - Apr 2020",
+    type: "Internship, On-site, Morocco",
+    description: "Taught graphic design with a focus on Adobe Photoshop and Illustrator to students. Helped 95% of students improve their design skills and creative approaches.",
+    icon: <GraduationCap className="w-6 h-6" />
+  }
+];
+
 export default function Story() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const experiences = [
-    {
-      role: "Video Editor | Graphic Designer",
-      company: "Phennx",
-      period: "Jun 2024 - Oct 2024",
-      type: "Part-time, Remote, Australia",
-      description: "Created and edited videos for various social media platforms using Adobe Creative Suite. Designed graphics that supported marketing campaigns, leading to a 20% increase in online visibility over five months.",
-      icon: <Video className="w-6 h-6" />
-    },
-    {
-      role: "Data Scraping Specialist",
-      company: "S2M Distribution",
-      period: "May 2024 - Jul 2024",
-      type: "Part-time, On-site, Morocco",
-      description: "Collected and organized data by scraping information from various online sources to support business decisions and market analysis. Presented findings that improved the company's market strategy.",
-      icon: <Database className="w-6 h-6" />
-    },
-    {
-      role: "Video Editor | Graphic Designer",
-      company: "DigiReach Media",
-      period: "Jan 2022 - Oct 2023",
-      type: "Full-time, Remote, United Kingdom",
-      description: "Produced and edited video content for social media platforms, including video podcasts and promotional content. Designed creative assets that boosted client engagement across multiple platforms.",
-      icon: <Building2 className="w-6 h-6" />
-    },
-    {
-      role: "Video Editor | Graphic Designer",
-      company: "Viral Ideas",
-      period: "Jan 2023 - Apr 2023",
-      type: "Full-time, Remote, United States",
-      description: "Created and edited video content for social media, enhancing brand visibility by designing innovative graphics. Led the creation of campaigns that increased follower count by 15%.",
-      icon: <Laptop className="w-6 h-6" />
-    },
-    {
-      role: "Graphic Design Instructor",
-      company: "Dar Chabab Batana",
-      period: "Jan 2020 - Apr 2020",
-      type: "Internship, On-site, Morocco",
-      description: "Taught graphic design with a focus on Adobe Photoshop and Illustrator to students. Helped 95% of students improve their design skills and creative approaches.",
-      icon: <GraduationCap className="w-6 h-6" />
-    }
-  ];
-
-  const languages = [
-    { name: "Arabic", level: "Native", progress: 100 },
-    { name: "English", level: "Professional", progress: 90 },
-    { name: "French", level: "Basic", progress: 40 }
-  ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <PageTransition>
-      <Toaster position="top-right" />
-      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       <div className="relative">
+        <Toaster position="top-right" />
+        <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
         {/* Hero Section with Parallax Effect */}
         <div className="h-[70vh] relative overflow-hidden">
           <div className="absolute inset-0">
@@ -314,51 +321,7 @@ export default function Story() {
           </div>
         </ScrollReveal>
 
-        {/* Footer */}
-        <footer className="relative py-8 border-t border-gray-800/50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-              <p className="text-gray-400 text-sm">
-                © {new Date().getFullYear()} Eddits. All rights reserved.
-              </p>
-              <div className="flex items-center gap-4">
-                <a
-                  href="https://www.instagram.com/drazzzy__/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
-                           flex items-center justify-center transition-all duration-300
-                           hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
-                           hover:border-cyan-500/30 hover:scale-110"
-                >
-                  <Instagram className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
-                </a>
-                <a
-                  href="https://www.behance.net/mostafadrazy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
-                           flex items-center justify-center transition-all duration-300
-                           hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
-                           hover:border-cyan-500/30 hover:scale-110"
-                >
-                  <PenTool className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/eddarrazy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 
-                           flex items-center justify-center transition-all duration-300
-                           hover:bg-gradient-to-r hover:from-cyan-500/20 hover:to-violet-500/20
-                           hover:border-cyan-500/30 hover:scale-110"
-                >
-                  <Linkedin className="w-4 h-4 text-gray-300 hover:text-white transition-colors" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer variant="full" />
       </div>
     </PageTransition>
   );
