@@ -152,9 +152,12 @@ export default function Story() {
                   <div className="relative">
                     <div className="aspect-square rounded-2xl overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-violet-500/20 mix-blend-overlay"></div>
-                      <img 
-                        src="https://images.unsplash.com/photo-1536240478700-b869070f9279?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-                        alt="Creative Process"
+                      <video 
+                        src="https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fhv1qaGPxLSiUaA4R-lv_0_20240403210232.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
                         className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                       />
                     </div>

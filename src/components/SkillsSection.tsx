@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Video, Camera, Palette, Monitor, PenTool, Film,
   Play, Image, Layout, Figma, Youtube, FileImage,
-  Edit, Type, Code, Brain, Box, FileSpreadsheet,
+  Edit, Database, Code, Brain, Box, FileSpreadsheet,
   Presentation, Layers, Brush, Pen, Lightbulb,
   Shapes, Sparkles
 } from 'lucide-react';
@@ -20,7 +20,7 @@ const skills = [
   { name: "Graphic Design", icon: <Palette className="w-5 h-5" /> },
   { name: "UI/UX Design", icon: <Layout className="w-5 h-5" /> },
   { name: "Figma", icon: <Figma className="w-5 h-5" /> },
-  { name: "Typography", icon: <Type className="w-5 h-5" /> },
+  { name: "Data Scraping", icon: <Database className="w-5 h-5" /> },
   { name: "HTML/CSS", icon: <Code className="w-5 h-5" /> },
   { name: "JavaScript", icon: <Shapes className="w-5 h-5" /> },
   { name: "3D Design", icon: <Box className="w-5 h-5" /> },
