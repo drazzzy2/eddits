@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import Testimonial from './Testimonial';
 import StatCard from './StatCard';
 import { Users, Clock, Star, Coffee, Instagram, Linkedin, PenTool } from 'lucide-react';
@@ -42,17 +42,6 @@ const testimonials = [
 ];
 
 export default function HeroSection() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const handleSmoothScroll = useCallback((e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const element = document.getElementById(id.replace('#', ''));
@@ -61,18 +50,52 @@ export default function HeroSection() {
     }
   }, []);
 
+  const handleDownloadResume = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // Convert Google Drive view URL to direct download URL
+    const fileId = '14pjdHoggdJ3H8TrdHiXV9NAOzEywoguo';
+    const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+    window.open(downloadUrl, '_blank');
+  }, []);
+
   return (
     <section id="home" className="relative min-h-screen w-full flex items-center justify-center">
       {/* Hero Background Image with Enhanced Fade Effect */}
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
           <img 
-            src="https://creatorspace.imgix.net/users/cm36fnldg0bvzqq01ucd25h3d/ss7vzE6uBy0sHxb9-bg.png?w=1920&h=1080&fit=crop&crop=focalpoint&auto=compress" 
+            src="https://creatorspace.imgix.net/users/cm36fnldg0bvzqq01ucd25h3d/ss7vzE6uBy0sHxb9-bg.png?w=1920&h=1080&fit=crop&crop=focalpoint&auto=compress&sat=20&con=10" 
             alt="Background" 
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center brightness-110 contrast-110 saturate-125"
           />
+          {/* Overlay gradients */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-[#0A0B0F]"></div>
           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[#0A0B0F] opacity-80"></div>
+          
+          {/* New Digital Creator Title */}
+          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+            <div className="text-center space-y-2 animate-fade-in scale-90 md:scale-100 animate-container-zoom">
+              {/* Digital Title */}
+              <h1 className="font-space text-[20rem] md:text-[28rem] font-bold uppercase animate-color-cycle animate-text-glow tracking-tighter animate-title leading-none">
+                Digital
+              </h1>
+
+              {/* Creator Title */}
+              <h1 className="font-space text-[20rem] md:text-[28rem] font-bold uppercase animate-color-cycle animate-text-glow tracking-tighter animate-title-delayed leading-none">
+                Creator
+              </h1>
+            </div>
+          </div>
+          
+          {/* New Foreground Image */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <img 
+              src="https://creatorspace.imgix.net/users/cm36fnldg0bvzqq01ucd25h3d/QgYihpKnUySxSnA2-ss7vzE6uBy0sHxb9-bg.png?w=1920&h=1080&fit=crop&crop=focalpoint&auto=compress"
+              alt="Foreground"
+              className="w-full h-full object-cover object-center"
+            />
+          </div>
+          
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0B0F] to-transparent"></div>
           <div className="absolute inset-0 opacity-[0.15] mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxwYXRoIGQ9Ik0wIDBoMzAwdjMwMEgweiIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=')]"></div>
         </div>
@@ -125,17 +148,7 @@ export default function HeroSection() {
         <ScrollReveal>
           <div className="text-center relative z-30 max-w-3xl mx-auto">
             <div className="space-y-8">
-              <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold gradient-text">
-                Hi, I'm Eddarrazy
-              </h1>
-              <div className="space-y-6">
-                <h2 className="text-xl sm:text-2xl md:text-3xl text-white font-medium">
-                  Video Editor & Motion Designer
-                </h2>
-                <p className="text-lg sm:text-xl text-gray-300">
-                  Crafting compelling visual stories that captivate and inspire.
-                </p>
-              </div>
+              <div className="h-32"></div> {/* Spacer to maintain layout */}
               <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 pt-8">
                 <a 
                   href="#work" 
@@ -189,6 +202,31 @@ export default function HeroSection() {
                   <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 
                                 bg-gradient-to-r from-cyan-500/10 to-violet-500/10 
                                 transition-transform duration-500"></div>
+                </a>
+                <a 
+                  href="#" 
+                  onClick={handleDownloadResume}
+                  className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-violet-500 
+                           rounded-xl text-white font-medium transition-all duration-300 
+                           hover:shadow-lg hover:shadow-cyan-500/25 hover:scale-[1.02]
+                           relative overflow-hidden group"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Download Resume
+                    <svg 
+                      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                      />
+                    </svg>
+                  </span>
                 </a>
               </div>
             </div>

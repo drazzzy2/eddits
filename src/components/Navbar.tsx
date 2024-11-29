@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -75,18 +75,12 @@ export default function Navbar() {
         >
           <div className="flex items-center justify-between lg:justify-around gap-4">
             {/* Logo */}
-            <Link to="/" 
-               className={`relative group flex items-center gap-2 transition-all duration-500
-                          ${scrolled ? 'scale-90' : 'scale-100'}`}>
-              <div className="relative w-9 h-9">
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500 to-violet-500 animate-pulse blur-md opacity-50 group-hover:opacity-70 transition-opacity"></div>
-                <div className="relative h-full rounded-lg bg-black/90 flex items-center justify-center border border-white/10">
-                  <Sparkles className="w-4 h-4 text-cyan-400 group-hover:text-violet-400 transition-colors" />
-                </div>
-              </div>
-              <span className="text-lg font-semibold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">
-                Eddarrazy
-              </span>
+            <Link to="/" className="block">
+              <img 
+                src="/logo.png" 
+                alt="Eddarrazy Logo" 
+                className="w-16 h-16 object-contain" 
+              />
             </Link>
 
             {/* Desktop Navigation */}
