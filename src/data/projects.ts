@@ -16,9 +16,9 @@ export const verticalProjects = [
     size: 'sm' as const
   },
   {
-    title: "Brand Video",
-    category: "Commercial",
-    mediaUrl: "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2FjP1WNArsfiVwFktk-users_cm1uo4uof00llr801vewmaatr_use1Yr0KA4owTnTQ-Talking201.mp4",
+    title: "Brand Story",
+    category: "Video & Graphics",
+    mediaUrl: "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fn3an2PhKlgBmy8Rb-Aya.mp4",
     isVideo: true,
     aspectRatio: '9/16' as const,
     size: 'sm' as const
@@ -32,9 +32,9 @@ export const verticalProjects = [
     size: 'sm' as const
   },
   {
-    title: "Brand Story",
-    category: "Video & Graphics",
-    mediaUrl: "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fn3an2PhKlgBmy8Rb-Aya.mp4",
+    title: "Brand Video",
+    category: "Commercial",
+    mediaUrl: "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2FjP1WNArsfiVwFktk-users_cm1uo4uof00llr801vewmaatr_use1Yr0KA4owTnTQ-Talking201.mp4",
     isVideo: true,
     aspectRatio: '9/16' as const,
     size: 'sm' as const
@@ -43,6 +43,14 @@ export const verticalProjects = [
     title: "Product Launch",
     category: "Commercial",
     mediaUrl: "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2FxdZSUve1GZrg2Ayx-Nested%2520Sequence%252001_3.mp4",
+    isVideo: true,
+    aspectRatio: '9/16' as const,
+    size: 'sm' as const
+  },
+  {
+    title: "UK Lifestyle",
+    category: "Social Media",
+    mediaUrl: "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2FPfDqybWkJQX9XIu8-There%2520is%2520no%2520point%2520living%2520in%2520The%2520UK%2520%2523unitedkingdom.mp4",
     isVideo: true,
     aspectRatio: '9/16' as const,
     size: 'sm' as const
