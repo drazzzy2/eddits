@@ -32,7 +32,7 @@ export default function CompactMediaContent({
             playsInline
             onClick={onTogglePlay}
           >
-            <source src={mediaUrl} type="video/mp4" />
+            <source src={`${mediaUrl}?w=1280&q=100`} type="video/mp4" />
           </video>
           {(!isPlaying || showControls) && (
             <div className="absolute inset-0 flex items-center justify-center">

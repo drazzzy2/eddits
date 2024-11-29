@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import PageTransition from '../components/PageTransition';
 import ContactModal from '../components/ContactModal';
@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import { Building2, Video, Database, Laptop, GraduationCap, Languages, Book, Globe, Mail } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
+import { useDeviceType } from '../hooks/useDeviceType';
 
 const progressVariants = {
   hidden: { width: 0 },
@@ -87,10 +88,26 @@ const experiences = [
 
 export default function Story() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isMobile } = useDeviceType();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isMobile) {
+        videoRef.current.preload = 'metadata';
+        videoRef.current.autoplay = false;
+      } else {
+        videoRef.current.preload = 'auto';
+        videoRef.current.play().catch(error => {
+          console.log('Autoplay prevented:', error);
+        });
+      }
+    }
+  }, [isMobile]);
 
   return (
     <PageTransition>
@@ -153,13 +170,28 @@ export default function Story() {
                     <div className="aspect-square rounded-2xl overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-violet-500/20 mix-blend-overlay"></div>
                       <video 
-                        src="https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fhv1qaGPxLSiUaA4R-lv_0_20240403210232.mp4"
-                        autoPlay
+                        ref={videoRef}
+                        src={`${isMobile 
+                          ? "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fhv1qaGPxLSiUaA4R-lv_0_20240403210232.mp4"
+                          : "https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fhv1qaGPxLSiUaA4R-lv_0_20240403210232.mp4?w=480"}`}
                         loop
                         muted
                         playsInline
-                        className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                        poster="https://storage.googleapis.com/creatorspace-public/users%2Fcm36fnldg0bvzqq01ucd25h3d%2Fhv1qaGPxLSiUaA4R-lv_0_20240403210232.mp4?w=480&frame=1"
+                        className={`w-full h-full object-cover transform transition-transform duration-700 ${
+                          !isMobile ? 'hover:scale-105' : ''
+                        }`}
                       />
+                      {isMobile && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                          <button 
+                            onClick={() => videoRef.current?.play()} 
+                            className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-white"
+                          >
+                            Play Video
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-cyan-500 to-violet-500 rounded-full blur-2xl opacity-60"></div>
                   </div>

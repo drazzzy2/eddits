@@ -66,7 +66,7 @@ export default function ProjectCard({
                     playsInline
                     autoPlay
                   >
-                    <source src={mediaUrl} type="video/mp4" />
+                    <source src={`${mediaUrl}?w=480&q=70`} type="video/mp4" />
                   </video>
                 ) : (
                   <img 
