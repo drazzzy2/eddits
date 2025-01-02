@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Home from './pages/Home';
-import Portfolio from './pages/Portfolio';
-import Story from './pages/Story';
-import Layout from './components/Layout';
+import LoadingScreen from './components/LoadingScreen';
+import { lazyLoad } from './utils/lazyLoad';
+
+// Lazy load components
+const Home = lazyLoad(() => import('./pages/Home'));
+const Portfolio = lazyLoad(() => import('./pages/Portfolio'));
+const Story = lazyLoad(() => import('./pages/Story'));
+const Layout = lazyLoad(() => import('./components/Layout'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -25,7 +29,9 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <AnimatedRoutes />
+      <Suspense fallback={<LoadingScreen />}>
+        <AnimatedRoutes />
+      </Suspense>
     </Router>
   );
 }

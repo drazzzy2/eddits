@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 interface VideoPlayerProps {
   src: string;
@@ -14,15 +14,6 @@ const aspectRatioClasses = {
 export default function VideoPlayer({ src, aspectRatio = '16/9' }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay failed - this is expected on some browsers/devices
-        console.log('Autoplay prevented');
-      });
-    }
-  }, []);
-
   return (
     <div className={`relative ${aspectRatioClasses[aspectRatio]} rounded-2xl overflow-hidden`}>
       <video
@@ -31,7 +22,8 @@ export default function VideoPlayer({ src, aspectRatio = '16/9' }: VideoPlayerPr
         loop
         muted
         playsInline
-        preload="auto"
+        preload="none"
+        poster={`${src}?w=480&frame=1`}
       >
         <source src={src} type="video/mp4" />
         Your browser does not support the video tag.
