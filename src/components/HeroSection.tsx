@@ -64,7 +64,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
           <img 
-            src="https://creatorspace.imgix.net/users/cm36fnldg0bvzqq01ucd25h3d/ss7vzE6uBy0sHxb9-bg.png?w=1920&h=1080&fit=crop&crop=focalpoint&auto=compress&sat=20&con=10" 
+            src="/images/hero-bg.jpg"
             alt="Background" 
             className="w-full h-full object-cover object-center brightness-110 contrast-110 saturate-125"
           />
