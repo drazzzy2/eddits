@@ -50,9 +50,30 @@ export default function Navbar() {
 
   const navItems = [
     { label: 'My Story', href: '/story' },
-    { label: 'Projects', href: '#work' },
+    { label: 'All Work', href: '#work' },
+    { label: 'Web Projects', href: '#web-projects', scroll: () => {
+      // Set web projects as active and scroll to section
+      const event = new CustomEvent('setActiveSection', { detail: 'web' });
+      document.dispatchEvent(event);
+    }},
     { label: 'Process', href: '#process' }
   ];
+
+  // Listen for custom events to update active section
+  useEffect(() => {
+    const handleSetActiveSection = (e: any) => {
+      const section = e.detail;
+      const element = document.getElementById('work');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    document.addEventListener('setActiveSection', handleSetActiveSection);
+    return () => {
+      document.removeEventListener('setActiveSection', handleSetActiveSection);
+    };
+  }, []);
 
   return (
     <motion.header 
@@ -91,7 +112,10 @@ export default function Navbar() {
                     <a
                       key={item.label}
                       href={item.href}
-                      onClick={(e) => handleNavClick(e, item.href)}
+                      onClick={(e) => {
+                        handleNavClick(e, item.href);
+                        if (item.scroll) item.scroll();
+                      }}
                       className={`relative px-3 lg:px-4 py-2 text-sm font-medium text-gray-300 
                                 transition-all duration-300 ease-in-out
                                 ${scrolled ? 'rounded-lg hover:bg-white/10' : 'hover:text-white'}
@@ -180,7 +204,10 @@ export default function Navbar() {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.href)}
+                    onClick={(e) => {
+                      handleNavClick(e, item.href);
+                      if (item.scroll) item.scroll();
+                    }}
                     className={`block px-4 py-3 text-base font-medium text-gray-300
                              transition-all duration-300
                              ${scrolled ? 'rounded-xl' : 'rounded-full'}
@@ -204,17 +231,21 @@ export default function Navbar() {
                   </Link>
                 )
               ))}
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
-                className={`block px-4 py-3 text-base font-medium text-white
-                         transition-all duration-300
-                         ${scrolled ? 'rounded-xl bg-gradient-to-r from-cyan-500 to-violet-500' : 'rounded-full bg-white/10'}
-                         hover:bg-white/20
-                         focus:outline-none focus:ring-2 focus:ring-cyan-500/20`}
-              >
-                Let's Talk
-              </a>
+              
+              {/* Mobile Contact Button */}
+              <div className="pt-4 pb-2">
+                <a
+                  href="#contact"
+                  onClick={(e) => handleNavClick(e, '#contact')}
+                  className={`block w-full text-center px-4 py-3 text-base font-medium text-white
+                          bg-gradient-to-r from-cyan-500 to-violet-500
+                          transition-all duration-300
+                          ${scrolled ? 'rounded-xl' : 'rounded-full'}
+                          focus:outline-none focus:ring-2 focus:ring-cyan-500/20`}
+                >
+                  Let's Talk
+                </a>
+              </div>
             </div>
           </motion.div>
         </nav>

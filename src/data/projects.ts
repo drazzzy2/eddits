@@ -115,3 +115,58 @@ export const horizontalProjects = [
     size: 'lg' as const
   }
 ];
+
+export const webProjects = [
+  {
+    title: "Gym Coach Website",
+    category: "UI/UX Design",
+    description: "A modern fitness website design for gym coaches with user-friendly interfaces and intuitive navigation",
+    technologies: ["Figma", "Adobe XD", "Prototype Design"],
+    mediaUrl: "https://creatorspace.imgix.net/users/cm36fnldg0bvzqq01ucd25h3d/2YfMlO5QHAAek1vJ-39c49c183612443.6542ba9b00464.png?w=1920&h=1080&fit=crop&crop=focalpoint&auto=compress",
+    demoUrl: null,
+    behanceUrl: "https://www.behance.net/gallery/183612443/A-Gym-coach-Website-Design-UIUX",
+    githubUrl: null,
+    isVideo: false,
+    aspectRatio: '16/9' as const,
+    size: 'lg' as const
+  },
+  {
+    title: "9adiya Legal Case Management",
+    category: "Full-Stack Development",
+    description: "A comprehensive legal case management system with document tracking, scheduling, and client communication features. I handled the entire process from UI/UX design to front-end and back-end development.",
+    technologies: ["React", "Node.js", "MongoDB", "Arabic RTL UI", "Figma"],
+    mediaUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/c5c0c7225577443.681fa8263ce19.jpg",
+    demoUrl: "http://9adiya.site/",
+    behanceUrl: "https://www.behance.net/gallery/225577443/9adiya-Website-Design",
+    githubUrl: null,
+    isVideo: false,
+    aspectRatio: '16/9' as const,
+    size: 'lg' as const
+  },
+  {
+    title: "Tabr3 Donation Platform",
+    category: "Full-Stack Development",
+    description: "An intuitive donation platform designed to connect donors with charitable causes and facilitate giving. Full implementation from UI/UX design to development and deployment.",
+    technologies: ["Next.js", "Tailwind CSS", "Arabic RTL UI", "Figma"],
+    mediaUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/1400/3546e6225579067.681fb1002b4b5.jpg",
+    demoUrl: "https://tabr3.vercel.app/",
+    behanceUrl: "https://www.behance.net/gallery/225579067/Tabr3-Website-Design",
+    githubUrl: null,
+    isVideo: false,
+    aspectRatio: '16/9' as const,
+    size: 'lg' as const
+  },
+  {
+    title: "Rental Application Platform",
+    category: "UI/UX Design",
+    description: "A streamlined rental application platform that simplifies the property rental process for both tenants and landlords",
+    technologies: ["Figma", "User Experience", "Responsive Design"],
+    mediaUrl: "https://mir-s3-cdn-cf.behance.net/project_modules/fs/621508182674111.6531861b34e0d.png",
+    demoUrl: null,
+    behanceUrl: "https://www.behance.net/gallery/182674111/A-rental-Application-Website-Design-UIUX",
+    githubUrl: null,
+    isVideo: false,
+    aspectRatio: '16/9' as const,
+    size: 'lg' as const
+  }
+];
